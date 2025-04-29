@@ -28,6 +28,8 @@ function addWord(word) {
   }
 }
 
+const shownWords = new Set();
+
 function fetchData() {
   fetch(`${domain}/wordcloud`)
     .then(response => response.json())
@@ -37,7 +39,12 @@ function fetchData() {
       chatHistory.forEach(word => {
         word = word.trim();
         if (word.length > 0) {
-          addWord(word);
+          if (!shownWords.has(word)) {
+            shownWords.add(word);
+            addWord(word);
+          } else {
+            addWord(word); // Isto apenas aumenta o tamanho se já existia
+          }
         }
       });
     })
