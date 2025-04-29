@@ -7,11 +7,10 @@ document.getElementById('question').innerText = questionText;
 const cloud = document.getElementById('comment-cloud');
 const wordsMap = {};
 
-function addWord(word) {
+function addWord(word, count) {
   if (wordsMap[word]) {
-    let el = wordsMap[word];
-    let currentSize = parseFloat(window.getComputedStyle(el).fontSize);
-    el.style.fontSize = (currentSize + 5) + 'px';
+    const el = wordsMap[word];
+    el.style.fontSize = (24 + count * 5) + 'px';
   } else {
     const el = document.createElement('div');
     el.className = 'word';
@@ -22,30 +21,31 @@ function addWord(word) {
 
     el.style.left = Math.random() * maxWidth + 'px';
     el.style.top = Math.random() * maxHeight + 'px';
+    el.style.fontSize = (24 + count * 5) + 'px';
 
     cloud.appendChild(el);
     wordsMap[word] = el;
   }
 }
 
-const shownWords = new Set();
-
 function fetchData() {
   fetch(`${domain}/wordcloud`)
     .then(response => response.json())
     .then(data => {
-      let chatHistory = (data.wordcloud || "").toLowerCase().split(',');
+      const chatHistory = (data.wordcloud || "")
+        .toLowerCase()
+        .split(',')
+        .map(w => w.trim())
+        .filter(w => w.length > 0);
+
+      const countMap = {};
 
       chatHistory.forEach(word => {
-        word = word.trim();
-        if (word.length > 0) {
-          if (!shownWords.has(word)) {
-            shownWords.add(word);
-            addWord(word);
-          } else {
-            addWord(word); // Isto apenas aumenta o tamanho se já existia
-          }
-        }
+        countMap[word] = (countMap[word] || 0) + 1;
+      });
+
+      Object.entries(countMap).forEach(([word, count]) => {
+        addWord(word, count);
       });
     })
     .catch(error => console.error('Erro ao buscar dados:', error));
