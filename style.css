@@ -1,0 +1,52 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  color: white;
+  overflow: hidden;
+}
+
+#quiz-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px 40px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+#comment-cloud {
+  position: relative;
+  width: 100vw;
+  height: 70vh;
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+.word {
+  position: absolute;
+  font-size: 24px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.8);
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
