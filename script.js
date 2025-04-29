@@ -16,8 +16,8 @@ function addWord(word, count) {
     el.className = 'word';
     el.innerText = word;
 
-    const maxWidth = cloud.offsetWidth - 150;
-    const maxHeight = cloud.offsetHeight - 50;
+    const maxWidth = 1920 - 150;
+    const maxHeight = 600 - 50;
 
     el.style.left = Math.random() * maxWidth + 'px';
     el.style.top = Math.random() * maxHeight + 'px';
