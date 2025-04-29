@@ -28,10 +28,11 @@ h1 {
 
 #comment-cloud {
   position: relative;
-  width: 100vw;
-  height: 70vh;
-  margin-top: 20px;
+  width: 1920px;    /* Largura fixa */
+  height: 600px;    /* Altura fixa */
+  margin: 0 auto;   /* Centralizado no ecrã */
   overflow: hidden;
+  background: transparent;
 }
 
 .word {
